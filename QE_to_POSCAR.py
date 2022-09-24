@@ -110,10 +110,10 @@ elif ibrav == 4:
     # 需要的是A和C
     for i in range(len(qe_in_list)):
         if qe_in_list[i].find(r'A =') != -1:
-            A_temp = re.findall(r"\d+.\d+", qe_in_list[i])
+            A_temp = re.findall(r"\d+.?\d*", qe_in_list[i])
             A = float(A_temp[0])
         if qe_in_list[i].find(r'C =') != -1:
-            C_temp = re.findall(r"\d+.?\d*", qe_in_list[i])
+            C_temp = re.findall(r"\d+[.]?\d*", qe_in_list[i])  # 需匹配的字符应该用[]括起来
             C = float(C_temp[0])
 
     # 输出晶格矢量
