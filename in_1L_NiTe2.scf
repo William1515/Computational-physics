@@ -1,0 +1,75 @@
+&control
+   prefix = 'nite2'
+   calculation = 'scf'
+   restart_mode = 'from_scratch'
+  wf_collect=.true.
+ !  verbosity=high
+   tstress = .true.
+   tprnfor = .true.
+!   disk_io='none'
+   outdir = './outdir'
+   wfcdir = './wfcdir'
+pseudo_dir='/public3/home/sc53267/software/QE/PP/official' 
+         nstep =  1000  ,
+             !  etot_conv_thr = 3.0E-9  ,
+                forc_conv_thr = 1.0D-5 ,
+/
+&system
+   ibrav = 4
+A =  3.93525515  
+C =  25.3  
+ !  A= 3.84572913364214
+ !  C=22.8915002346
+!  lspinorb=.true.
+!  noncolin=.true.
+   nat = 10
+   ntyp = 4
+   ecutwfc = 100
+ !  ecutrho=700
+   occupations  =  'smearing' ,
+               smearing  =  'cold' ,
+               degauss  =  0.01 ,
+               nspin  =  1 ,
+               lda_plus_u  =  .false. ,
+/
+&electrons
+   electron_maxstep = 200
+   conv_thr = 1.0d-14
+   mixing_mode = 'plain'
+ !  diagonalization = 'cg'
+/
+&IONS
+ion_dynamics='bfgs'
+!pot_extrapolation = 'second_order' ,
+! wfc_extrapolation = 'second_order' ,
+! trust_radius_max = 0.8D0 ,
+! trust_radius_min = 1.0D-3 ,
+!  trust_radius_min = 0.5D ,
+! trust_radius_ini = 0.5D ,
+ /
+&CELL
+    cell_dynamics = 'bfgs' ,
+    press = 0.00 ,
+    cell_dofree='2Dxy' ,
+  !  wmass =  0.00700000  ,
+/
+!CELL_PARAMETERS
+!   1.000016906   0.000000000   0.000000000
+!  -0.500008453   0.866040045   0.000000000
+!   0.000000000   0.000000000   3.912095522
+ATOMIC_SPECIES
+  Ni   58.69   Ni.pbe-mt_fhi.UPF
+  Te   127.6   Te.pbe-mt_fhi.UPF
+ATOMIC_POSITIONS crystal
+ Ni  0.00000000  0.00000000  0.60747264
+ Ni  0.00000000  0.00000000  0.39252736
+ Ni  -0.00000000  -0.00000000  0.50000000
+ Te  0.66666663  0.33333331  0.55395538
+ Te  0.33333334  0.66666669  0.44604462
+ Te  0.66666663  0.33333331  0.34198650
+ Te  0.33333334  0.66666669  0.65801350
+ Si   0.66666663  0.33333331  0.55395538
+ Si  0.33333334  0.66666669  0.44604462
+ C   0.66666663  0.33333331  0.34198650
+K_POINTS automatic
+18 18 1 0 0 0

@@ -1,0 +1,51 @@
+&CONTROL
+    calculation='scf',
+    disk_io='none',
+    prefix='TaS2',
+pseudo_dir='/public3/home/sc53267/software/QE/PP/official' 
+    outdir='./outdir',
+    verbosity='low',
+    tprnfor=.true.,
+    tstress=.true.,
+    forc_conv_thr=4.0d-4,
+    etot_conv_thr=1.0d-8,
+/
+&SYSTEM
+    input_dft='vdw-df2-b86r',
+    ibrav = 4,
+    A = 3.2560700079
+    C = 25.0000000002
+    nat= 7, ntyp= 2,
+    occupations = 'smearing', smearing = 'cold', degauss = 1.0d-2,
+    ecutwfc= 50,
+ecutrho = 400,
+/
+&ELECTRONS
+    electron_maxstep = 100,
+    conv_thr = 1.0d-15,
+    mixing_mode = 'plain',
+  !  mixing_beta = 0.8d0,
+    diagonalization = 'david',
+/
+&IONS
+    ion_dynamics='bfgs',
+/
+&CELL
+    cell_dynamics='bfgs',
+    cell_dofree='2Dxy',
+    press=0.0,
+   ! press_conv_thr=0.1,
+/
+ATOMIC_SPECIES
+Ta   180.9  Ta.pbe-spn-kjpaw_psl.0.2.UPF
+S    32.1    S.pbe-n-kjpaw_psl.0.1.UPF
+ATOMIC_POSITIONS (crystal)
+Ta   0.0000021253   0.9999978747   0.6199473451
+Ta   0.9999978309   0.0000021691   0.3544830865
+Ta   0.9999978309   0.0000021691   0.4872140469
+S   0.3333315766   0.6666684244   0.2911858932
+S   0.3333318545   0.6666681465   0.4201702338
+S   0.6666681190   0.3333319190   0.5542590503
+S   0.6666685197   0.3333315183   0.6832446494
+K_POINTS {automatic}
+18 18 1 0 0 0
