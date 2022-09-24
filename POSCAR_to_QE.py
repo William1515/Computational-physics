@@ -3,8 +3,19 @@ import numpy as np
 import math
 import sys
 
-file_name_temp = sys.argv[1]
-file_name = file_name_temp
+try:
+    file_name_temp = sys.argv[1]
+except:
+    print("Failed to find file.'")
+    file_name_temp = input("Please enter the file name angin:")
+finally:
+    file_name = file_name_temp
+
+try:
+    fp = open(file_name, 'r+')
+except:
+    print("Failed to open file, please check your input.")
+    sys.exit(1)
 
 
 # 求两向量间夹角，即晶胞轴角
