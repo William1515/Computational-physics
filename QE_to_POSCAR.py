@@ -118,7 +118,7 @@ elif ibrav == 4:
 
     # 输出晶格矢量
     vector1 = [A, 0.00, 0.00]
-    vector2 = [A / 2, 1.73205 * A / 2, 0.00]
+    vector2 = [-1 * A / 2, 1.73205 * A / 2, 0.00]
     vector3 = [0.00, 0.00, C]
 
 vector = [vector1, vector2, vector3]
