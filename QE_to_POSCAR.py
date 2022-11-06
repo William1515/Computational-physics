@@ -22,6 +22,9 @@ except:
 
 qe_in_list = fp.readlines()
 
+(filepath, filename) = os.path.split(file_qe)
+# print(filepath)
+
 nat = 0
 ntyp = 0
 
@@ -125,8 +128,11 @@ vector = [vector1, vector2, vector3]
 
 print("ibrav = %d" % ibrav)
 
+# 将输出文件定位到输入文件所在的文件夹中
+output_file = os.path.join(filepath,"QE_to_POACAR.vasp")
+
 # 开始写入输出文件
-fp = open("./QE_to_POACAR.vasp", "w")
+fp = open(output_file, "w")
 print(
     """CIF file
     1.00000""", file=fp
