@@ -2,6 +2,7 @@ import linecache
 import numpy as np
 import math
 import sys
+import os
 
 try:
     file_name_temp = sys.argv[1]
@@ -17,6 +18,8 @@ except:
     print("Failed to open file, please check your input.")
     sys.exit(1)
 
+(filepath, filename) = os.path.split(file_name)
+# print(filepath)
 
 # 求两向量间夹角，即晶胞轴角
 def vec_angle(v1, v2):
@@ -99,8 +102,11 @@ for i in range(len(atom_specie)):
 nat = atom_total                               # 原子总数
 ntyp = len(atom_specie)                        # 原子种类数
 
+# 将输出文件定位到输入文件所在的文件夹中
+output_file = os.path.join(filepath,"POSCAR_to_QE.scf")
+
 # 输出QE文件
-fp = open("./POSCAR_to_QE.scf", "w")
+fp = open(output_file, "w")
 print(
     """&CONTROL
 ...
