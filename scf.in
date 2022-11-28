@@ -1,0 +1,48 @@
+&control
+ prefix = 'C'
+ calculation = 'scf'
+ restart_mode = 'from_scratch'
+ wf_collect=.true.
+ disk_io='low'
+ verbosity='low',
+ tstress = .true.
+ tprnfor = .true.
+ outdir = './outdir'
+ wfcdir = './wfcdir'
+pseudo_dir = '/home/fpzheng/software/QE/pseudo/QE_official'
+ nstep = 1000 ,
+ ! etot_conv_thr = 3.0E-9 ,
+ forc_conv_thr = 1.0D-5 ,
+/
+&SYSTEM
+    !  input_dft='vdw-df2-b86r',
+    ibrav = 4,
+    A = 2.457076418904,
+    C = 20,
+    nat= 2, ntyp= 1,
+    occupations = 'smearing', smearing = 'cold', degauss = 1.0d-2,
+    ecutwfc= 60,
+/
+&ELECTRONS
+    electron_maxstep = 100,
+    conv_thr = 1.0d-8,
+    mixing_mode = 'plain',
+    mixing_beta = 0.8d0,
+    diagonalization = 'david',
+/
+&IONS
+    ion_dynamics='bfgs',
+/
+&CELL
+    cell_dynamics='bfgs',
+	cell_dofree='2Dxy',
+    press=0.0,
+    press_conv_thr=0.1,
+/
+ATOMIC_SPECIES
+  C   12   C.pbe-mt_fhi.UPF
+ATOMIC_POSITIONS {crystal}
+C        0.333333000   0.666667000   0.500000000
+C        0.666667000   0.333333000   0.500000000
+K_POINTS {automatic}
+18 18 1 0 0 0

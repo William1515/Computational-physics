@@ -109,8 +109,21 @@ output_file = os.path.join(filepath,"POSCAR_to_QE.scf")
 fp = open(output_file, "w")
 print(
     """&CONTROL
-...
-/ 
+    prefix = 'C'
+    calculation = 'scf' 
+    restart_mode = 'from_scratch'
+    wf_collect=.true.
+    disk_io='low'
+    verbosity='low',
+    tstress = .true.
+    tprnfor = .true.
+    outdir = './outdir'
+    wfcdir = './wfcdir'
+    pseudo_dir = '/home/fpzheng/software/QE/pseudo/QE_official'
+    nstep = 1000 ,
+    ! etot_conv_thr = 3.0E-9 ,
+    forc_conv_thr = 1.0D-5 ,
+/
 &system
     ibrav = %d""" % ibrav, file=fp
 )
@@ -118,22 +131,30 @@ print(
 # 输出system中的celldm参数
 if ibrav == 4:
     print(
-        """\tA = %f
-    C = %f
-    nat = %d
-    ntyp = %d
+        """\tA = %f,
+    C = %f,
+    nat = %d,
+    ntyp = %d,
+/
         """ % (constant_list[0], constant_list[2], nat, ntyp), file = fp
     )
 
 print(
-    """&electrons
-...
+    """&ELECTRONS
+    electron_maxstep = 100,
+    conv_thr = 1.0d-8,
+    mixing_mode = 'plain',
+    mixing_beta = 0.8d0,
+    diagonalization = 'david',
 / 
 &IONS
-...
+    ion_dynamics='bfgs',
 /
 &CELL
-...   
+    cell_dynamics='bfgs',
+	cell_dofree='2Dxy',
+    press=0.0,
+    press_conv_thr=0.1,
 /
 """, file=fp
 )
